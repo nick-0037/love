@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Te quiero</title>
+    <style>
+      :root {
+        --bg1: #ffebf3;
+        --bg2: #ffd6e7;
+        --pink: #ff4d8d;
+        --pink-dark: #d93b78;
+        --purple: #8f5af5;
+        --white: #fff8fc;
+        --text: #4f2340;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(180deg, var(--bg1), var(--bg2));
+        color: var(--text);
+        overflow: hidden;
+      }
+
+      .scene {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        overflow: hidden;
+      }
+
+      .heart {
+        position: absolute;
+        font-size: 26px;
+        opacity: 0.6;
+        animation: floatUp linear infinite;
+      }
+
+      .heart:nth-child(1) { left: 12%; top: 20%; animation-duration: 8s; }
+      .heart:nth-child(2) { left: 72%; top: 16%; animation-duration: 9s; }
+      .heart:nth-child(3) { left: 18%; top: 68%; animation-duration: 7.5s; }
+      .heart:nth-child(4) { left: 80%; top: 70%; animation-duration: 10s; }
+      .heart:nth-child(5) { left: 48%; top: 8%; animation-duration: 8.5s; }
+      .heart:nth-child(6) { left: 28%; top: 82%; animation-duration: 7.2s; }
+      .heart:nth-child(7) { left: 63%; top: 74%; animation-duration: 8.8s; }
+      .heart:nth-child(8) { left: 86%; top: 38%; animation-duration: 9.6s; }
+      .heart:nth-child(9) { left: 6%; top: 48%; animation-duration: 8.4s; }
+      .heart:nth-child(10) { left: 52%; top: 58%; animation-duration: 10.2s; }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(30px) scale(0.8);
+          opacity: 0;
+        }
+        15% { opacity: 0.8; }
+        100% {
+          transform: translateY(-120px) scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      .card {
+        position: relative;
+        z-index: 10;
+        width: min(92vw, 420px);
+        background: rgba(255, 255, 255, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 28px;
+        box-shadow: 0 22px 42px rgba(199, 60, 118, 0.2), 0 0 30px rgba(255, 136, 191, 0.2);
+        backdrop-filter: blur(10px);
+        padding: 26px 22px 18px;
+        text-align: center;
+        transform-style: preserve-3d;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ff7ab9, #ff4d8d);
+        box-shadow: 0 10px 22px rgba(255, 77, 141, 0.45);
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 7vw, 2.7rem);
+        line-height: 1.1;
+        letter-spacing: 0.04em;
+      }
+
+      .subtitle {
+        margin: 10px 0 18px;
+        font-size: 1.04rem;
+        color: rgba(79, 35, 64, 0.8);
+        font-weight: 600;
+      }
+
+      .message {
+        margin: 0;
+        font-size: 1.04rem;
+        line-height: 1.8;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .message strong {
+        color: var(--pink-dark);
+      }
+
+      .quotes {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .quote {
+        position: absolute;
+        max-width: max-content;
+        white-space: nowrap;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        border-radius: 18px;
+        padding: 10px 12px;
+        font-size: 0.78rem;
+        font-weight: 800;
+        line-height: 1.3;
+        color: var(--text);
+        box-shadow: 0 12px 20px rgba(146, 81, 117, 0.12);
+        backdrop-filter: blur(8px);
+        transform-style: preserve-3d;
+        animation: drift 3.2s ease-in-out infinite alternate;
+      }
+
+      .quote:nth-child(1) { top: 12%; left: calc(50% - 350px); --rot: -8deg; }
+      .quote:nth-child(2) { top: 12%; right: calc(50% - 350px); --rot: 8deg; animation-delay: 0.2s; }
+      .quote:nth-child(3) { top: 38%; left: calc(50% - 370px); --rot: -10deg; animation-delay: 0.4s; }
+      .quote:nth-child(4) { top: 38%; right: calc(50% - 370px); --rot: 10deg; animation-delay: 0.6s; }
+      .quote:nth-child(5) { bottom: 36%; left: calc(50% - 355px); --rot: -6deg; animation-delay: 0.8s; }
+      .quote:nth-child(6) { bottom: 36%; right: calc(50% - 355px); --rot: 6deg; animation-delay: 1s; }
+      .quote:nth-child(7) { bottom: 12%; left: calc(50% - 340px); --rot: -5deg; animation-delay: 1.2s; }
+      .quote:nth-child(8) { bottom: 12%; right: calc(50% - 340px); --rot: 5deg; animation-delay: 1.4s; }
+
+      @keyframes drift {
+        0% {
+          transform: translate(-10px, 0) translateZ(8px) rotateZ(var(--rot)) rotateY(-18deg) rotateX(10deg);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translate(20px, -12px) translateZ(18px) rotateZ(calc(var(--rot) + 8deg)) rotateY(18deg) rotateX(-12deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-6px, -18px) translateZ(24px) rotateZ(calc(var(--rot) - 10deg)) rotateY(-18deg) rotateX(14deg);
+          opacity: 0.9;
+        }
+      }
+
+      .buttons {
+        margin-top: 22px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .pill {
+        border: none;
+        border-radius: 999px;
+        padding: 12px 18px;
+        background: linear-gradient(135deg, var(--pink), var(--purple));
+        color: white;
+        font-size: 0.92rem;
+        font-weight: 700;
+        box-shadow: 0 10px 20px rgba(143, 90, 245, 0.25);
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+        .quote {
+          font-size: 0.68rem;
+          max-width: max-content;
+          padding: 8px 10px;
+          opacity: 0.55;
+        }
+
+        /* Adjust all 8 quotes to sit neatly around the card on mobile */
+        .quote:nth-child(1) { top: 3%; left: 3%; --rot: -5deg; }
+        .quote:nth-child(2) { top: 3%; right: 3%; --rot: 5deg; }
+        .quote:nth-child(3) { top: 16%; left: 8%; --rot: -8deg; }
+        .quote:nth-child(4) { top: 16%; right: 8%; --rot: 8deg; }
+        .quote:nth-child(5) { bottom: 16%; left: 8%; --rot: -6deg; }
+        .quote:nth-child(6) { bottom: 16%; right: 8%; --rot: 6deg; }
+        .quote:nth-child(7) { bottom: 3%; left: 3%; --rot: -4deg; }
+        .quote:nth-child(8) { bottom: 3%; right: 3%; --rot: 4deg; }
+      }
+
+      @media (max-width: 390px) {
+        .card {
+          padding: 22px 18px 16px;
+        }
+
+        .message {
+          font-size: 0.98rem;
+        }
+      }
+
+      #cardContent {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .fade-out {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      .explosion-emoji {
+        position: fixed;
+        pointer-events: none;
+        font-size: 24px;
+        z-index: 9999;
+        animation: explode 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+      }
+
+      @keyframes explode {
+        0% {
+          transform: translate(-50%, -50%) scale(0.5);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.5) rotate(var(--rot));
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scene">
+      <span class="heart">💖</span>
+      <span class="heart">💗</span>
+      <span class="heart">✨</span>
+      <span class="heart">💞</span>
+      <span class="heart">💕</span>
+      <span class="heart">🌼</span>
+      <span class="heart">🌞</span>
+      <span class="heart">💛</span>
+      <span class="heart">🌸</span>
+      <span class="heart">✨</span>
+
+      <div class="quotes">
+        <div class="quote">✨ Sigue brillando.</div>
+        <div class="quote">🌼 Eres muy valiosa.</div>
+        <div class="quote">💛 Confía en tu luz.</div>
+        <div class="quote">🌞 Cada día es una oportunidad.</div>
+        <div class="quote">🌸 Disfruta lo bonito.</div>
+        <div class="quote">💖 Eres increíble.</div>
+        <div class="quote">🌿 Sonríe siempre.</div>
+        <div class="quote">🌸 Sigue soñando.</div>
+      </div>
+
+      <div class="card" id="loveCard">
+        <div id="cardContent">
+          <div class="badge">✨</div>
+          <h1>Mi día</h1>
+          <p class="subtitle">siempre tiene algo hermoso 💫</p>
+
+          <p class="message">
+            <strong>Haz</strong> espacio para la calma,<br />
+            <strong>disfruta</strong> lo simple y lo bonito,<br />
+            <strong>crece</strong> con alegría y confianza,<br />
+            y recuerda que Dios está contigo, guiando tu camino 🌟✨
+          </p>
+        </div>
+
+        <div class="buttons">
+          <button class="pill" id="nextBtn">Sigue adelante 💛</button>
+        </div>
+      </div>
+
+      <script>
+        const card = document.getElementById('loveCard');
+        const nextBtn = document.getElementById('nextBtn');
+        const cardContent = document.getElementById('cardContent');
+
+        // Tilt effect
+        card.addEventListener('pointermove', (event) => {
+          const rect = card.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width;
+          const y = (event.clientY - rect.top) / rect.height;
+
+          const rotateY = (x - 0.5) * 18;
+          const rotateX = (0.5 - y) * 18;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+
+        card.addEventListener('pointerleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
+
+        // Pages content
+        const pages = [
+          {
+            badge: "✨",
+            title: "Mi día",
+            subtitle: "siempre tiene algo hermoso 💫",
+            message: `<strong>Haz</strong> espacio para la calma,<br />
+              <strong>disfruta</strong> lo simple y lo bonito,<br />
+              <strong>crece</strong> con alegría y confianza,<br />
+              y recuerda que Dios está contigo, guiando tu camino 🌟✨`
+          },
+          {
+            badge: "🌸",
+            title: "Cada paso",
+            subtitle: "cuenta en tu historia ✨",
+            message: `<strong>Confía</strong> en el proceso,<br />
+              <strong>aprecia</strong> lo lejos que has llegado,<br />
+              <strong>abraza</strong> tus sueños con fuerza,<br />
+              y camina siempre con el corazón lleno de fe 💖🌸`
+          },
+          {
+            badge: "💫",
+            title: "Un recordatorio",
+            subtitle: "para tu corazón hoy 💛",
+            message: `<strong>Eres</strong> capaz de cosas increíbles,<br />
+              <strong>tienes</strong> una luz que inspira a otros,<br />
+              <strong>mereces</strong> toda la felicidad del mundo,<br />
+              y nunca olvides sonreír ante cada nuevo amanecer ☀️🌻`
+          }
+        ];
+
+        let currentPageIndex = 0;
+
+        // Button interaction: explosion and page transition
+        nextBtn.addEventListener('click', (event) => {
+          // Explode particles
+          const rect = nextBtn.getBoundingClientRect();
+          const btnX = rect.left + rect.width / 2;
+          const btnY = rect.top + rect.height / 2;
+
+          const emojis = ['💖', '💗', '✨', '🌸', '💛', '💕', '💫', '🌻', '🌼'];
+          for (let i = 0; i < 16; i++) {
+            const span = document.createElement('span');
+            span.className = 'explosion-emoji';
+            span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+            // Random trajectory
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 40 + Math.random() * 90;
+            const tx = Math.cos(angle) * distance + 'px';
+            const ty = Math.sin(angle) * distance + 'px';
+            const rot = (Math.random() - 0.5) * 60 + 'deg';
+
+            span.style.setProperty('--tx', tx);
+            span.style.setProperty('--ty', ty);
+            span.style.setProperty('--rot', rot);
+
+            // Position at click center
+            span.style.left = btnX + 'px';
+            span.style.top = btnY + 'px';
+
+            document.body.appendChild(span);
+
+            // Remove particle after animation finished
+            setTimeout(() => span.remove(), 800);
+          }
+
+          // Cycle page
+          currentPageIndex = (currentPageIndex + 1) % pages.length;
+          const nextPage = pages[currentPageIndex];
+
+          cardContent.classList.add('fade-out');
+          setTimeout(() => {
+            cardContent.querySelector('.badge').textContent = nextPage.badge;
+            cardContent.querySelector('h1').textContent = nextPage.title;
+            cardContent.querySelector('.subtitle').innerHTML = nextPage.subtitle;
+            cardContent.querySelector('.message').innerHTML = nextPage.message;
+            cardContent.classList.remove('fade-out');
+          }, 300);
+        });
+      </script>
+    </div>
+  </body>
+</html>
